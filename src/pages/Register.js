@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // ✅ ADD THIS IMPORT
 import './Register.css';
 
 // ✅ BACKEND URL CHANGE - Render deployment
@@ -201,8 +202,9 @@ function Register() {
           </div>
           <button type="submit">Register</button>
           
+          {/* ✅ FIXED: Changed <a href> to <Link to> */}
           <p style={{textAlign: 'center', marginTop: '15px'}}>
-            Already have an account? <a href="/login">Login here</a>
+            Already have an account? <Link to="/login">Login here</Link>
           </p>
         </form>
       </div>
