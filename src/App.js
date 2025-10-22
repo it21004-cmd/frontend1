@@ -218,8 +218,9 @@ function RegisterPage() {
               Register Now
             </button>
             
+            {/* ✅ FIXED: Changed <a href> to <Link to> */}
             <p style={{ textAlign: 'center', marginTop: '15px' }}>
-              Already have an account? <a href="/login" style={{ color: '#366eea' }}>Login here</a>
+              Already have an account? <Link to="/login" style={{ color: '#366eea' }}>Login here</Link>
             </p>
           </form>
         </div>
