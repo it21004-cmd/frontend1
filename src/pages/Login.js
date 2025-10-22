@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom'; // ✅ useSearchParams import করুন
+import { useSearchParams, Link } from 'react-router-dom'; // ✅ Link import করুন
 
 // ✅ BACKEND URL CHANGE - Render deployment
 const API_BASE_URL = 'https://backend1-4sym.onrender.com';
@@ -108,8 +108,9 @@ function Login({ setUser }) {
           Login
         </button>
       </form>
+      {/* ✅ FIXED: Changed <a href> to <Link to> */}
       <p style={{ textAlign: 'center', marginTop: '15px' }}>
-        Don't have an account? <a href="/register">Register here</a>
+        Don't have an account? <Link to="/register">Register here</Link>
       </p>
     </div>
   );
