@@ -1,0 +1,2 @@
+# Public folder-এ এই command run করুন
+echo "/*    /index.html   200" > public/_redirects
