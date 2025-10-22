@@ -1,4 +1,3 @@
-// App.js - এ নিচের changes করুন
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaUserPlus, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import ProfileEdit from './pages/ProfileEdit';
@@ -8,7 +7,6 @@ import NotificationPage from './pages/NotificationPage';
 import Verify from './pages/Verify';
 import Login from './pages/Login';
 import Logout from "./pages/Logout";
-import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import VerifyEmail from './pages/VerifyEmail';
 
@@ -268,11 +266,10 @@ function App() {
     <BrowserRouter>
       <nav style={navStyle}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <a
-            href="#"
+          {/* ✅ FIXED: Replaced <a href="#"> with <button> */}
+          <button
             className="logo-link"
-            onClick={e => { 
-              e.preventDefault(); 
+            onClick={() => { 
               alert('MBSTU Research Gate - Research Collaboration Platform'); 
             }}
             onMouseEnter={() => setShowLogoTooltip(true)}
@@ -283,7 +280,10 @@ function App() {
               alignItems: "center",
               position: "relative",
               textDecoration: "none",
-              cursor: "pointer"
+              cursor: "pointer",
+              background: 'none',
+              border: 'none',
+              padding: 0
             }}
           >
             <img
@@ -309,7 +309,7 @@ function App() {
             >
               MBSTU Research Gate
             </span>
-          </a>
+          </button>
           
           <NavIcon to="/" icon={FaHome} label="Home" />
           <NavIcon to="/register" icon={FaUserPlus} label="Registration" />
