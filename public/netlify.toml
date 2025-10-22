@@ -1,0 +1,11 @@
+# Root folder-এ এই content দিয়ে file তৈরি করুন
+cat > netlify.toml << 'EOF'
+[build]
+  publish = "build"
+  command = "CI=false npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+EOF
