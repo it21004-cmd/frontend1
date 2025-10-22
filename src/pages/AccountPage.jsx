@@ -453,28 +453,40 @@ function UserPosts({ userPosts, loading, onPostsUpdate }) {
   }
 
   async function deletePost(id) {
-    if(window.confirm("Are you sure?")) {
-      try {
-        const token = localStorage.getItem('authToken');
-        // ✅ CHANGED: http://localhost:5000 → https://backend1-4sym.onrender.com
-        const response = await fetch(`${API_BASE_URL}/api/posts/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        if (response.ok) {
-          setToast("Post deleted!");
-          onPostsUpdate();
-        } else {
-          setToast("Failed to delete post");
+  if(window.confirm("Are you sure you want to delete this post?")) {
+    try {
+      const token = localStorage.getItem('authToken');
+      
+      console.log('🟢 Deleting post:', id);
+      
+      const response = await fetch(`${API_BASE_URL}/api/posts/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      } catch (error) {
-        setToast("Error deleting post");
+      });
+
+      const data = await response.json();
+      console.log('🟢 Delete response:', data);
+
+      if (response.ok && data.success) {
+        setToast("✅ Post deleted successfully!");
+        onPostsUpdate(); // Reload posts
+      } else {
+        // ✅ Better error message
+        const errorMsg = data.message || 'Unknown error occurred';
+        setToast(`❌ Failed to delete post: ${errorMsg}`);
+        
+        // Show detailed error in console for debugging
+        console.error('Delete failed details:', data);
       }
+    } catch (error) {
+      console.error('🔴 Delete error:', error);
+      setToast("❌ Network error while deleting post");
     }
   }
+}
 
   React.useEffect(() => {
     if(toast) { 
