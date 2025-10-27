@@ -34,10 +34,19 @@ function Register() {
       console.log('🟢 Response data:', data);
 
       if (data.success) {
-        // ✅ FIXED: Always go to verify page
-        setRegisteredEmail(email);
-        setStep('verify');
-        console.log('✅ Redirecting to verification page...');
+        // ✅ CHANGED: Check if email was sent successfully
+        if (data.emailSent) {
+          // Email sent successfully
+          setRegisteredEmail(email);
+          setStep('verify');
+          console.log('✅ Email sent, redirecting to verification...');
+        } else {
+          // Email failed but registration successful
+          alert('⚠️ Registration successful but email failed. Please contact support.');
+          // Still go to verification page but user knows email didn't send
+          setRegisteredEmail(email);
+          setStep('verify');
+        }
       } else {
         alert('❌ ' + data.message);
       }
